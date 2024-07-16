@@ -1,3 +1,5 @@
+package org.example;
+
 public class TriangleStarPattern {
 
     public static void dreieckStern(int n) {
