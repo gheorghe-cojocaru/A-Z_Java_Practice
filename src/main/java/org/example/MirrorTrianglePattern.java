@@ -31,11 +31,33 @@ public class MirrorTrianglePattern {
         }
     }
 
+    private static void lowerPart( int size) {
+
+        int m, n;
+
+        //äussere Schleife für Reihen
+        for (m = 1; m <= size; m++) {
+
+            //erste innere Schleife für Dreieick
+            for ( n = 1; n < m; n++) {
+                System.out.print(" ");
+            }
+
+            //zweite innere Schleife
+            for (n = m; n <= size; n++) {
+                System.out.print("*" + " ");
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
-        //Grösse des Dreiecks
         int size = 7;
 
-        //Methode abrufen
+        //Methoden abrufen
         upperPart(size);
+        lowerPart(size);
     }
+
+
 }
