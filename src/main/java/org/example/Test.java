@@ -1,34 +1,104 @@
 package org.example;
 
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class Test {
+    private JFrame frame;
+    private JTextField textField;
+    private double number1, number2, result;
+    private char operation;
 
-    public static double calculateArea(int choice, List<Double> arr) {
-        double area = 0;
-        switch (choice) {
-            case 1:
-                double R = arr.get(0);
-                area = Math.PI * R * R;
-                break;
-            case 2:
-                double L = arr.get(0);
-                double B = arr.get(1);
-                area = L * B;
-                break;
-            default:
-                throw new IllegalArgumentException("Falsch eingegeben. Geben sie bitte 1 oder 2.");
+    public Test() {
+        createGUI();
+    }
+
+    private void createGUI() {
+        frame = new JFrame("Calculator");
+        frame.setSize(300, 300);
+        frame.setLayout(new BorderLayout());
+
+        textField = new JTextField();
+        frame.add(textField, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 4));
+        frame.add(panel, BorderLayout.CENTER);
+
+        String[] buttons = {"7", "8", "9", "/",
+                "4", "5", "6", "*",
+                "1", "2", "3", "-",
+                "0", "C", "=", "+"};
+
+        for (String button : buttons) {
+            JButton jButton = new JButton(button);
+            jButton.addActionListener(new ButtonListener());
+            panel.add(jButton);
         }
-        return area;
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
+
+    private class ButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+
+            switch (command) {
+                case "0":
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                    textField.setText(textField.getText() + command);
+                    break;
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    number1 = Double.parseDouble(textField.getText());
+                    operation = command.charAt(0);
+                    textField.setText("");
+                    break;
+                case "=":
+                    number2 = Double.parseDouble(textField.getText());
+                    calculateResult();
+                    textField.setText(String.valueOf(result));
+                    break;
+                case "C":
+                    textField.setText("");
+                    number1 = 0;
+                    number2 = 0;
+                    result = 0;
+                    break;
+            }
+        }
+    }
+
+    private void calculateResult() {
+        switch (operation) {
+            case '+':
+                result = number1 + number2;
+                break;
+            case '-':
+                result = number1 - number2;
+                break;
+            case '*':
+                result = number1 * number2;
+                break;
+            case '/':
+                result = number1 / number2;
+                break;
+        }
     }
 
     public static void main(String[] args) {
-        List<Double> circleDimensions = Arrays.asList(5.0);
-        System.out.println("Die Fläche des Kreises ist: " + calculateArea(1, circleDimensions));
-
-        List<Double> rectangleDimensions = Arrays.asList(5.0, 6.0);
-        System.out.println("Die Fläche des Rechteckes ist: " + calculateArea(2, rectangleDimensions));
+        new Test();
     }
-
 }
-
