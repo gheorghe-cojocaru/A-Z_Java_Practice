@@ -57,6 +57,6 @@ public class ForEach {
         }
         endTime = Calendar.getInstance().getTimeInMillis();
         System.out.println("By calculating collection.size() first :: " + (endTime - startTime) + " ms");
-        
+
     }
 }
