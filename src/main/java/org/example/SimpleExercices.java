@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SimpleExercices {
     public static void main(String[] args) {
@@ -20,7 +21,7 @@ public class SimpleExercices {
 
             System.out.println("Städte: " + staedte); */
 
-        int a = 5;
+       /* int a = 5;
         int b = 14;
 
         System.out.println("Vorher: a = " + a + " b = " + b);
@@ -30,6 +31,24 @@ public class SimpleExercices {
         b = temp;
 
         System.out.println("Nacher: a = " + a + " b= " + b);
+        } */
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Gib dein Alter ein: " );
+
+        int alter = scanner.nextInt();
+
+        if (alter >= 18) {
+            System.out.println("Du bist Volljährig");
+        } else {
+            System.out.println("Du bist minderjährig");
         }
+
+        scanner.close();
+
+
     }
+}
+
 
